@@ -1,0 +1,14 @@
+{
+  "name": "pointpulse-cedar-point",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A mobile-first Cedar Point wait-time and dining timer PWA.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/timer-utils.test.mjs test/wait-data-utils.test.mjs test/weather-utils.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

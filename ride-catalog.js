@@ -1,0 +1,8 @@
+const groups = {
+  coasters: ['Blue Streak', 'Cedar Creek Mine Ride', 'Corkscrew', 'GateKeeper', 'Gemini', 'Iron Dragon', 'Magnum XL-200', 'Maverick', 'Millennium Force', 'Raptor', 'Rougarou', "Siren's Curse", 'Steel Vengeance', 'Top Thrill 2', 'Valravn', 'Wild Mouse', 'Wilderness Run', 'Woodstock Express'],
+  family: ['4 x 4s', 'Cadillac Cars', 'Cedar Point and Lake Erie Railroad', 'Cedar Point and Lake Erie Railroad - Frontier', 'Charlie Brown’s Wind Up', 'Flying Ace Balloon Race', 'Giant Wheel', 'Lake Erie Eagles', 'Linus’ Beetle Bugs', 'Midway Carousel', 'PEANUTS™ 500', 'PEANUTS™ Road Rally', 'Sky Ride East', 'Sky Ride West', 'Snoopy’s Deep Sea Divers', 'Snoopy’s Express Railroad', 'Balloon Race', 'Camp Bus', 'Dune Buggies', 'Helicopters', 'Joe Cool’s Dodgem School', 'Kiddy Kingdom Carousel', 'Kite-Eating Tree', 'Motorcycles', 'Mustangs', 'Police Cars', 'Red Baron', 'Rock, Spin & Turn', 'Roto Whip', 'Sky Fighters', 'Snoopy’s Space Race', 'Space Age', 'Woodstock’s Airmail', 'Woodstock’s Whirlybirds'],
+  flat: ['Atomic Scrambler', 'Calypso', 'Cedar Downs Racing Derby', 'Dodgem', 'Matterhorn', 'MaXair', 'Ocean Motion', 'Pipe Scream', 'Power Tower Drop', 'Power Tower Shot', 'Skyhawk', 'SlingShot', 'Super Himalaya', 'Troika', 'Wave Swinger', 'WindSeeker'],
+  water: ['Thunder Canyon', 'Breakwater Bay', 'Cedar Creek Crosscurrent', 'Great Lakes Cove', 'Lake Erie Noreaster', 'Lakeslide Landing', 'Lemmy’s Lagoon', 'Lily Pad Walk', 'Perch Plunge', 'Point Plummet', 'Portside Plunge', 'Riptide Raceway', 'Runaway Rapids', 'SplasH2O', 'Storm Surge', 'Waterin’ Hole', 'Wild Walleye']
+};
+
+export const RIDE_CATALOG = Object.entries(groups).flatMap(([category, names]) => names.map((name) => ({ name, category, area: 'Cedar Point' })));

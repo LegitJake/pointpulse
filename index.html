@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071b35" />
+    <meta name="application-name" content="PointPulse" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="PointPulse" />
+    <meta name="google-site-verification" content="sKuIfqPyE37X2b7ZB4Y2heIM-M1gYEVZ5LW5dMksJl0" />
+    <title>PointPulse — Cedar Point</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script data-goatcounter="https://pointpulse.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  </head>
+  <body>
+    <div id="share-toast" class="share-toast" role="status" aria-live="polite" hidden>Link copied to clipboard!</div>
+    <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+
+    <aside id="side-drawer" class="side-drawer" aria-label="PointPulse navigation" aria-hidden="true">
+      <div class="drawer-header">
+        <div class="drawer-brand">
+          <span class="drawer-brand-mark">P</span>
+          <span>PointPulse</span>
+        </div>
+        <button id="drawer-close" class="drawer-close" type="button" aria-label="Close menu">✕</button>
+      </div>
+
+      <nav class="drawer-nav" aria-label="Main menu">
+        <button type="button" class="drawer-nav-item active" data-tab="waits">Wait Times</button>
+        <button type="button" class="drawer-nav-item" data-tab="dining">Dining</button>
+        <button type="button" class="drawer-nav-item" data-tab="map">Park Map</button>
+      </nav>
+
+      <div class="drawer-socials">
+        <p class="drawer-label">Follow / Socials</p>
+        <div class="social-list">
+          <a href="https://www.tiktok.com/@thelegitjake" target="_blank" rel="noopener noreferrer" class="social-link tiktok">♫ TikTok</a>
+          <a href="https://www.youtube.com/@TheLegitjake" target="_blank" rel="noopener noreferrer" class="social-link youtube">▶ YouTube</a>
+          <a href="https://www.instagram.com/TheLegitjake" target="_blank" rel="noopener noreferrer" class="social-link instagram">◎ Instagram</a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app-shell">
+      <section class="tab-panel" data-tab-panel="waits">
+        <section class="hero">
+          <div class="top-nav-bar">
+            <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open menu">☰</button>
+          </div>
+          <div class="status-row">
+            <span class="live-dot"></span>
+            <span id="park-status">LIVE AT THE POINT</span>
+            <div class="status-actions" aria-label="Header actions">
+              <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle light and dark mode">🌙 Dark</button>
+              <button id="share-btn" class="share-btn status-action" type="button" aria-label="Share current page">⇪</button>
+              <button id="refresh-btn" class="refresh-btn" type="button" aria-label="Refresh wait times">↻ Refresh</button>
+            </div>
+          </div>
+          <div class="hero-copy"><p class="eyebrow">CEDAR POINT, OHIO</p><h1>Make every<br /><em>minute</em> count.</h1></div>
+          <div class="weather-card"><span id="hero-weather-icon" class="weather-icon">◌</span><div><strong id="hero-weather-temp">--°</strong><span id="hero-weather-condition">Loading weather…</span></div><span class="open-pill" id="open-count">Loading rides</span></div>
+        </section>
+
+        <section class="weather-section" aria-label="Sandusky weather">
+          <div class="section-heading"><div><p class="eyebrow">SANDUSKY, OHIO</p><h2>Park weather</h2></div><span id="weather-condition-icon" class="weather-summary-icon">◌</span></div>
+          <div class="weather-summary"><span id="weather-temperature" class="weather-summary-temp">--°</span><span id="weather-condition" class="weather-summary-copy">Loading current conditions…</span></div>
+          <div class="weather-grid"><div class="weather-stat"><strong id="weather-rain">--%</strong>rain chance</div><div class="weather-stat"><strong id="weather-wind">-- mph</strong>wind</div><div class="weather-stat"><strong id="weather-hi-low">-- / --</strong>high / low</div></div>
+          <div id="weather-alert" class="weather-alert" hidden></div><div id="hourly-forecast" class="hourly-row" aria-label="Hourly forecast"></div><p id="weather-updated" class="weather-updated">Weather updating…</p>
+        </section>
+
+        <section id="rides-section" class="waits-section">
+          <div class="section-heading"><div><p class="eyebrow">LIVE BOARD</p><h2 id="rides-heading">Roller coasters</h2></div><select id="filter-button" class="filter-button" aria-label="Filter attractions by category"><option value="coasters">Roller Coasters</option><option value="flat">Flat Rides</option><option value="water">Water Rides</option><option value="family">Family Rides</option><option value="other">Other Attractions</option><option value="all">All Attractions</option></select></div>
+          <div class="source-strip"><span class="source-pulse"></span><span id="updated-at">Fetching current waits…</span></div>
+          <div id="ride-list" class="ride-list" aria-live="polite"></div>
+        </section>
+
+        <section class="sources-card">
+          <div class="sources-icon">↗</div><div><strong>Verified park data</strong><p>Live rides from Queue-Times, sourced from Cedar Point / Six Flags systems.</p></div>
+          <a href="https://queue-times.com/parks/50/queue_times" target="_blank" rel="noopener" aria-label="Open Queue Times">→</a>
+        </section>
+      </section>
+
+      <section class="tab-panel" data-tab-panel="dining" hidden>
+        <section id="meal-card" class="meal-card" aria-label="All day dining meal timer">
+          <div class="meal-top"><div><p class="eyebrow">ALL DAY DINING</p><h2>Next meal window</h2></div><span class="utensils">⌁</span></div>
+          <div id="timer-display" class="timer-display">90:00</div>
+          <p id="timer-end" class="timer-end" aria-live="polite">Starts when you tap the timer.</p>
+          <p id="timer-copy" class="timer-copy">Tap start after you pick up your meal.</p>
+          <div class="timer-actions"><button id="timer-button" class="primary-button">Start 90 min timer</button><button id="pause-button" class="icon-button" aria-label="Pause meal timer" hidden>Ⅱ</button><button id="reset-button" class="icon-button" aria-label="Reset meal timer">↺</button></div>
+          <div class="timer-progress"><span id="timer-progress"></span></div>
+        </section>
+
+        <section id="dining-section" class="dining-section">
+          <div class="section-heading"><div><p class="eyebrow">MEAL PLAN</p><h2>Dining locations</h2></div><span class="open-pill">ALL DAY DINING</span></div>
+          <select id="dining-filter" class="filter-button" aria-label="Filter dining by park">
+            <option value="all">All Dining</option>
+            <option value="Cedar Point">Cedar Point</option>
+            <option value="Cedar Point Shores">Cedar Point Shores</option>
+          </select>
+          <div id="dining-list" class="dining-list"></div>
+        </section>
+      </section>
+
+      <section class="tab-panel" data-tab-panel="map" hidden>
+        <section id="map-section" class="map-section" aria-label="Interactive Cedar Point park map">
+          <div class="section-heading"><div><p class="eyebrow">PARK NAVIGATION</p><h2>Park map</h2></div></div>
+          <iframe
+            id="park-map"
+            width="100%"
+            height="100%"
+            style="border:0; min-height: 500px;"
+            loading="lazy"
+            allowfullscreen
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11928.3248312061!2d-82.6885!3d41.4822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883a443634b28c57%3A0x6d5cd5dbbd9de106!2sCedar%20Point!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus">
+          </iframe>
+        </section>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button type="button" class="nav-tab active" data-tab="waits"><span>⌁</span>Wait Times</button>
+      <button type="button" class="nav-tab" data-tab="dining"><span>◷</span>Dining</button>
+      <button type="button" class="nav-tab" data-tab="map"><span>⌖</span>Map</button>
+    </nav>
+    <script type="module" src="app.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', async () => {
+          const registration = await navigator.serviceWorker.register('./service-worker.js');
+          navigator.serviceWorker.addEventListener('controllerchange', () => {
+            window.location.reload();
+          });
+
+          if (registration.waiting) {
+            window.location.reload();
+          }
+        });
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && 'serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistration().then((registration) => {
+            if (registration && registration.waiting) {
+              window.location.reload();
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
